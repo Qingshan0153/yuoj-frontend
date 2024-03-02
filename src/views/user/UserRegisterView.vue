@@ -2,16 +2,16 @@
   <div id="userLogin">
     <h2 style="margin-bottom: 16px">用户注册</h2>
     <a-form
-      style="max-width: 480px; margin: 0 auto"
-      label-align="left"
-      auto-label-width
       :model="form"
+      auto-label-width
+      label-align="left"
+      style="max-width: 480px; margin: 0 auto"
       @submit="handleSubmit"
     >
       <a-form-item field="userAccount" label="账号">
         <a-input v-model="form.userAccount" placeholder="请输入账号" />
       </a-form-item>
-      <a-form-item field="userPassword" tooltip="密码不少于8位" label="密码">
+      <a-form-item field="userPassword" label="密码" tooltip="密码不少于8位">
         <a-input-password
           v-model="form.userPassword"
           placeholder="请输入密码"
@@ -19,8 +19,8 @@
       </a-form-item>
       <a-form-item
         field="checkPassword"
-        tooltip="密码不少于8位"
         label="确认密码"
+        tooltip="密码不少于8位"
       >
         <a-input-password
           v-model="form.checkPassword"
@@ -28,7 +28,7 @@
         />
       </a-form-item>
       <a-form-item>
-        <a-button type="primary" html-type="submit" style="width: 120px"
+        <a-button html-type="submit" style="width: 120px" type="primary"
           >注册
         </a-button>
       </a-form-item>
@@ -36,7 +36,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { reactive } from "vue";
 import { UserControllerService, UserRegisterRequest } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";

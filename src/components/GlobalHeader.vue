@@ -1,9 +1,9 @@
 <template>
-  <a-row id="globalHeader" align="center" :wrap="false">
+  <a-row id="globalHeader" :wrap="false" align="center">
     <a-col flex="auto">
       <a-menu
-        mode="horizontal"
         :selected-keys="selectedKeys"
+        mode="horizontal"
         @menu-item-click="doMenuClick"
       >
         <a-menu-item
@@ -12,7 +12,7 @@
           disabled
         >
           <div class="title-bar">
-            <img class="log" src="../assets/oj-log.svg" alt="oj判题系统" />
+            <img alt="oj判题系统" class="log" src="../assets/oj-log.svg" />
             <div class="title">OJ 判题</div>
           </div>
         </a-menu-item>
@@ -27,13 +27,12 @@
   </a-row>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { routes } from "@/router/routes";
 import { useRoute, useRouter } from "vue-router";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import checkAccess from "@/access/checkAccess";
-import ACCESS_ENUM from "@/access/accessEnum";
 
 const router = useRouter();
 const route = useRoute();
@@ -54,20 +53,9 @@ const visibleRoutes = computed(() => {
     if (item.meta?.hideInMenu) {
       return false;
     }
-    if (!checkAccess(loginUser, item?.meta?.access as string)) {
-      return false;
-    }
-    return true;
+    return checkAccess(loginUser, item?.meta?.access as string);
   });
 });
-
-setTimeout(() => {
-  store.dispatch("user/getLoginUser", {
-    userName: "鱼皮管理员",
-    userRole: ACCESS_ENUM.ADMIN,
-  });
-}, 3000);
-
 const doMenuClick = (key: string) => {
   router.push({
     path: key,

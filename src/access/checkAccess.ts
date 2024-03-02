@@ -1,7 +1,7 @@
 import ACCESS_ENUM from "@/access/accessEnum";
 
 /**
- * 权限校验(判断当前登录用户是否具有桌个权限)
+ * 权限校验(判断当前登录用户是否具有某个权限)
  * @param loginUser 当前登录用户
  * @param needAccess 需要的权限
  */
@@ -11,6 +11,7 @@ const checkAccess = (loginUser: any, needAccess = ACCESS_ENUM.NOT_LOGIN) => {
   if (needAccess === ACCESS_ENUM.NOT_LOGIN) {
     return true;
   }
+
   // 如果用户登录才能访问
   if (needAccess === ACCESS_ENUM.USER) {
     // 如果用户没登录，那么表示无权限

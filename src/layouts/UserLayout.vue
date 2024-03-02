@@ -3,7 +3,7 @@
     <a-layout style="height: 100vh">
       <a-layout-header class="header">
         <a-space>
-          <img class="logo" src="../assets/oj-log.svg" alt="oj判题系统" />
+          <img alt="oj判题系统" class="logo" src="../assets/oj-log.svg" />
           <div class="title">OJ 判题</div>
         </a-space>
       </a-layout-header>

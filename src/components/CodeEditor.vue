@@ -1,10 +1,14 @@
 <template>
-  <div id="code-editor" ref="codeEditorRef" style="min-height: 400px" />
+  <div
+    id="code-editor"
+    ref="codeEditorRef"
+    style="min-height: 400px; height: 70vh"
+  />
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import * as monaco from "monaco-editor";
-import { onMounted, ref, toRaw } from "vue";
+import { onMounted, ref, toRaw, watch } from "vue";
 import { defineProps, withDefaults } from "vue/dist/vue";
 
 /**
@@ -12,24 +16,44 @@ import { defineProps, withDefaults } from "vue/dist/vue";
  */
 interface Prop {
   value: string;
+  language?: string;
   handleChange: (v: string) => void;
 }
 
 const props = withDefaults(defineProps<Prop>(), {
   value: () => "",
+  language: () => "java",
   handleChange: (v: string) => {
     console.log(v);
   },
 });
 const codeEditorRef = ref();
 const codeEditor = ref();
+
+watch(
+  () => props.language,
+  () => {
+    codeEditor.value = monaco.editor.create(codeEditorRef.value, {
+      value: props.value,
+      language: props.language,
+      automaticLayout: true,
+      colorDecorators: true,
+      theme: "vs-dark",
+      minimap: {
+        enabled: true,
+      },
+      readOnly: false,
+    });
+  }
+);
+
 onMounted(() => {
   if (!codeEditorRef.value) {
     return;
   }
   codeEditor.value = monaco.editor.create(codeEditorRef.value, {
     value: props.value,
-    language: "java",
+    language: props.language,
     automaticLayout: true,
     colorDecorators: true,
     theme: "vs-dark",

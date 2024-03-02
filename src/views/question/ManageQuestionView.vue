@@ -6,9 +6,10 @@
       :pagination="{
         showTotal: true,
         pageSize: searchParams.pageSize,
-        current: searchParams.pageNum,
+        current: searchParams.current,
         total,
       }"
+      @page-change="onPageChange"
     >
       <template #optional="{ record }">
         <a-space>
@@ -20,8 +21,8 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { onMounted, ref } from "vue";
+<script lang="ts" setup>
+import { onMounted, ref, watchEffect } from "vue";
 import { Question, QuestionControllerService } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
 import { useRouter } from "vue-router";
@@ -31,7 +32,7 @@ const dataList = ref([]);
 
 const searchParams = ref({
   pageSize: 10,
-  pageNum: 1,
+  current: 1,
 });
 
 const loadData = async () => {
@@ -45,7 +46,12 @@ const loadData = async () => {
     message.error("加载数据失败" + res.message);
   }
 };
-
+/**
+ * 监听变量的改变
+ */
+watchEffect(() => {
+  loadData();
+});
 /**
  * 页面初始化完成后加载数据
  */
@@ -72,47 +78,43 @@ const columns = [
   },
   {
     title: "答案",
-    slotName: "answer",
+    dataIndex: "answer",
   },
   {
     title: "提交数",
-    slotName: "submitNum",
+    dataIndex: "submitNum",
   },
   {
     title: "题目通过数",
-    slotName: "acceptedNum",
+    dataIndex: "acceptedNum",
   },
   {
     title: "判题用例",
-    slotName: "judgeCase",
+    dataIndex: "judgeCase",
   },
   {
     title: "判题配置",
-    slotName: "judgeConfig",
+    dataIndex: "judgeConfig",
   },
   {
     title: "点赞数",
-    slotName: "thumbNum",
+    dataIndex: "thumbNum",
   },
   {
     title: "收藏数",
-    slotName: "favourNum",
-  },
-  {
-    title: "点赞数",
-    slotName: "thumbNum",
+    dataIndex: "favourNum",
   },
   {
     title: "用户ID",
-    slotName: "userId",
+    dataIndex: "userId",
   },
   {
     title: "创建时间",
-    slotName: "createTime",
+    dataIndex: "createTime",
   },
   {
     title: "修改时间",
-    slotName: "updateTime",
+    dataIndex: "updateTime",
   },
   {
     title: "Optional",
@@ -131,6 +133,13 @@ const doDelete = async (question: Question) => {
   } else {
     message.error("删除错误:" + question.title);
   }
+};
+
+const onPageChange = (page: number) => {
+  searchParams.value = {
+    ...searchParams.value,
+    current: page,
+  };
 };
 
 const router = useRouter();
