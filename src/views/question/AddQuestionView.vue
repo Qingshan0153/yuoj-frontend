@@ -96,13 +96,59 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import MdEditor from "@/components/MdEditor.vue";
-import {
-  QuestionAddRequest,
-  QuestionControllerService,
-} from "../../../generated";
+import { QuestionControllerService } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+// 如果页面地址包含update,视为更新页面
+const updatePage = route.path.includes("update");
+
+/**
+ * 根据题目id 获取需要修改的的数据
+ */
+const loadData = async () => {
+  const id = route.query.id;
+  if (!id) {
+    return;
+  }
+  const res = await QuestionControllerService.getQuestionByIdUsingGet(
+    id as any
+  );
+  if (res.code === 0) {
+    form.value = res.data as any;
+    if (!form.value.judgeCase) {
+      form.value.judgeCase = [
+        {
+          input: "",
+          output: "",
+        },
+      ];
+    } else {
+      form.value.judgeCase = JSON.parse(form.value.judgeCase as any);
+    }
+    if (!form.value.judgeConfig) {
+      form.value.judgeConfig = {
+        memoryLimit: 1000,
+        stackLimit: 1000,
+        timeLimit: 1000,
+      };
+    } else {
+      form.value.judgeConfig = JSON.parse(form.value.judgeConfig as any);
+    }
+    if (form.value.tags) {
+      form.value.tags = JSON.parse(form.value.tags as any);
+    }
+  } else {
+    message.error("加载失败," + res.message);
+  }
+};
+
+onMounted(() => {
+  loadData();
+});
 
 /**
  * 新增测试用例
@@ -126,10 +172,10 @@ const handleDelete = (index: number) => {
 };
 
 const form = ref({
-  tags: ["栈", "简单"],
-  title: "A + B",
-  answer: "暴力破解",
-  content: "题目内容",
+  title: "",
+  tags: [],
+  answer: "",
+  content: "",
   judgeConfig: {
     memoryLimit: 1000,
     stackLimit: 1000,
@@ -137,11 +183,11 @@ const form = ref({
   },
   judgeCase: [
     {
-      input: "1 2",
-      output: "3 4",
+      input: "",
+      output: "",
     },
   ],
-} as QuestionAddRequest);
+});
 
 const onContentChange = (value: string) => {
   form.value.content = value;
@@ -152,12 +198,24 @@ const onAnswerChange = (value: string) => {
 };
 
 const doSubmit = async () => {
-  console.log(form.value);
-  const res = await QuestionControllerService.addQuestionUsingPost(form.value);
-  if (res.code === 0) {
-    message.success("新建题目成功");
+  if (updatePage) {
+    const res = await QuestionControllerService.updateQuestionUsingPost(
+      form.value
+    );
+    if (res.code === 0) {
+      message.success("更新题目成功");
+    } else {
+      message.error("更新题目失败," + res.message);
+    }
   } else {
-    message.error("创建题目失败," + res.message);
+    const res = await QuestionControllerService.addQuestionUsingPost(
+      form.value
+    );
+    if (res.code === 0) {
+      message.success("新建题目成功");
+    } else {
+      message.error("创建题目失败," + res.message);
+    }
   }
 };
 </script>
