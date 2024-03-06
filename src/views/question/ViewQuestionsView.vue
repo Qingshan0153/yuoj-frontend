@@ -25,7 +25,7 @@
                   v-for="(tag, index) of question.tags"
                   :key="index"
                   color="green"
-                >{{ tag }}
+                  >{{ tag }}
                 </a-tag>
               </template>
             </a-card>
@@ -59,7 +59,7 @@
         />
         <a-divider size="0" />
         <a-button type="primary" style="min-width: 200px" @click="doSubmit"
-        >提交代码
+          >提交代码
         </a-button>
       </a-col>
     </a-row>
@@ -71,7 +71,6 @@ import { defineProps, onMounted, ref, withDefaults } from "vue";
 import {
   QuestionControllerService,
   QuestionSubmitAddRequest,
-  QuestionSubmitControllerService,
   QuestionVO,
 } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
@@ -115,7 +114,7 @@ const doSubmit = async () => {
   if (!question.value?.id) {
     return;
   }
-  const res = await QuestionSubmitControllerService.doQuestionSubmitUsingPost({
+  const res = await QuestionControllerService.doQuestionSubmitUsingPost({
     ...form.value,
     questionId: question.value?.id,
   });
