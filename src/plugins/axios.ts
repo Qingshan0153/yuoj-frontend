@@ -1,28 +1,31 @@
-// 添加请求拦截器
+// Add a request interceptor
 import axios from "axios";
 
+axios.defaults.withCredentials = true;
+
+// 添加响应拦截器
 axios.interceptors.request.use(
   function (config) {
-    // 在发送请求之前做些什么
+    // Do something before request is sent
     return config;
   },
   function (error) {
-    // 对请求错误做些什么
+    // Do something with request error
     return Promise.reject(error);
   }
 );
 
-// 添加响应拦截器
+// Add a response interceptor
 axios.interceptors.response.use(
   function (response) {
-    console.log("响应" + response);
-    // 2xx 范围内的状态码都会触发该函数。
-    // 对响应数据做点什么
+    // console.log("响应", response);
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
     return response;
   },
   function (error) {
-    // 超出 2xx 范围的状态码都会触发该函数。
-    // 对响应错误做点什么
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
     return Promise.reject(error);
   }
 );

@@ -1,4 +1,4 @@
-/**
+/*
  * 权限定义
  */
 const ACCESS_ENUM = {
@@ -6,5 +6,4 @@ const ACCESS_ENUM = {
   USER: "user",
   ADMIN: "admin",
 };
-
 export default ACCESS_ENUM;

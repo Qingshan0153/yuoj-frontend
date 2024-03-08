@@ -2,8 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+
 import type { JudgeCase } from './JudgeCase';
 import type { JudgeConfig } from './JudgeConfig';
+
 export type QuestionEditRequest = {
     answer?: string;
     content?: string;
@@ -13,4 +15,3 @@ export type QuestionEditRequest = {
     tags?: Array<string>;
     title?: string;
 };
-

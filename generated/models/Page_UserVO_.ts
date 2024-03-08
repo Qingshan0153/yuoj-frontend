@@ -2,8 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+
 import type { OrderItem } from './OrderItem';
 import type { UserVO } from './UserVO';
+
 export type Page_UserVO_ = {
     countId?: string;
     current?: number;
@@ -16,4 +18,3 @@ export type Page_UserVO_ = {
     size?: number;
     total?: number;
 };
-

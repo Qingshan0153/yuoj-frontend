@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+
 export type UserQueryRequest = {
     current?: number;
     id?: number;
@@ -14,4 +15,3 @@ export type UserQueryRequest = {
     userProfile?: string;
     userRole?: string;
 };
-

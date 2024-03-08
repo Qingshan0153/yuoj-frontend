@@ -1,51 +1,67 @@
 <template>
-  <div id="userLayout">
-    <a-layout style="height: 100vh">
-      <a-layout-header class="header">
-        <a-space>
-          <img alt="oj判题系统" class="logo" src="../assets/oj-log.svg" />
-          <div class="title">OJ 判题</div>
-        </a-space>
-      </a-layout-header>
+  <div id="user-layout">
+    <a-layout >
       <a-layout-content class="content">
         <router-view />
       </a-layout-content>
-      <a-layout-footer class="footer"
-        >&copy;copyright OJ判题系统
+      <a-layout-footer class="footer">
+        <div
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 35px;
+            margin-top: 8px;
+          "
+        >
+          <a
+            href="https://github.com/Qingshan0153"
+            target="_blank"
+            style="text-decoration: none; display: flex; align-items: center"
+          >
+            <icon-github
+              style="color: #262626bf"
+              :style="{ fontSize: '20px', marginRight: '5px' }"
+            />
+            <span
+              style="margin-bottom: 0; text-decoration: none; color: #262626bf"
+              >Qingshan0153 GitHub</span
+            >
+          </a>
+        </div>
       </a-layout-footer>
     </a-layout>
   </div>
 </template>
 
-<script></script>
-
 <style scoped>
-#userLayout {
+#user-layout {
   text-align: center;
-  background: url("https://gw.alipayobjects.com/zos/rmsportal/FfdJeJRQWjEeGTpqgBKj.png")
-    0% 0% / 100% 100%;
+  background-image: url("../assets/背景.png");
+  background-size: cover;
+  background-color: #f7f8fa;
 }
 
-#userLayout .header {
-  margin-top: 16px;
+#user-layout .header {
+  margin-top: 250px;
 }
 
-#userLayout .content {
+#user-layout .content {
   margin-bottom: 16px;
-  padding: 20px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#userLayout .footer {
-  padding: 16px;
+#user-layout .footer {
+  margin-bottom: 16px;
   position: sticky;
   bottom: 0;
   left: 0;
   right: 0;
   text-align: center;
 }
-
-#userLayout .logo {
-  width: 64px;
-  height: 64px;
-}
 </style>
+
+<script setup lang="ts"></script>
