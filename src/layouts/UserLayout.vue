@@ -37,7 +37,7 @@
 <style scoped>
 #user-layout {
   text-align: center;
-  background-image: url("../assets/背景.png");
+  background-image: url("../assets/background.png");
   background-size: cover;
   background-color: #f7f8fa;
 }

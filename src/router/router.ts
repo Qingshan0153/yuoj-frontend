@@ -3,7 +3,6 @@ import ACCESS_ENUM from "@/access/accessEnum";
 import UserLayout from "@/layouts/UserLayout.vue";
 import UserLoginView from "@/views/user/UserLoginView.vue";
 import UserRegisterView from "@/views/user/UserRegisterView.vue";
-import WxLoginView from "@/views/user/WxLoginView.vue";
 import AddQuestionView from "@/views/question/AddQuestionView.vue";
 import MenageQuestionView from "@/views/question/MenageQuestionView.vue";
 import QuestionsView from "@/views/question/QuestionsView.vue";
@@ -36,11 +35,6 @@ export const routes: Array<RouteRecordRaw> = [
         path: "/user/register",
         name: "用户注册",
         component: UserRegisterView,
-      },
-      {
-        path: "/user/wxLogin",
-        name: "微信登录",
-        component: WxLoginView,
       },
     ],
     meta: {

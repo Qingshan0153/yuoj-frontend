@@ -6,3 +6,9 @@ module.exports = defineConfig({
     config.plugin("monaco").use(new MonacoEditorWebpackPlugin());
   },
 });
+
+// 生产环境配置
+// module.exports = {
+//   publicPath:
+//     process.env.NODE_ENV === "production" ? "http://47.94.37.63" : "/",
+// };

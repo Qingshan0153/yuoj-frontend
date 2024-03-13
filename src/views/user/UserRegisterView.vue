@@ -68,26 +68,6 @@
       "
     >账号密码注册</span
     >
-    <a-space :size="28">
-      <div style="border: 1px solid #e5e5e5; padding: 10px; border-radius: 50%">
-        <icon-qq :size="19" style="color: #4a9afd; cursor: pointer"/>
-      </div>
-      <div style="border: 1px solid #e5e5e5; padding: 10px; border-radius: 50%">
-        <icon-github :size="19" style="color: #202020; cursor: pointer"/>
-      </div>
-      <div style="border: 1px solid #e5e5e5; padding: 10px; border-radius: 50%">
-        <icon-weibo-circle-fill
-            :size="19"
-            style="color: #e90e24; cursor: pointer"
-        />
-      </div>
-      <div style="border: 1px solid #e5e5e5; padding: 10px; border-radius: 50%">
-        <icon-wechat :size="19" style="color: #00ca00; cursor: pointer"/>
-      </div>
-      <div style="border: 1px solid #e5e5e5; padding: 10px; border-radius: 50%">
-        <icon-more :size="19"/>
-      </div>
-    </a-space>
     <div style="margin-top: 30px">
       <span style="font-size: 13px; color: #3c3c4399; display: inline-block"
       >注册或登录即代表您同意</span

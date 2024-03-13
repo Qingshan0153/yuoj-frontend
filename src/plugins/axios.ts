@@ -1,8 +1,15 @@
 // Add a request interceptor
 import axios from "axios";
+import { OpenAPI } from "../../generated";
 
-axios.defaults.withCredentials = true;
+OpenAPI.WITH_CREDENTIALS = true;
+const baseUrl =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:8121"
+    : "http://域名";
 
+OpenAPI.BASE = baseUrl;
+console.log("当前环境：", process.env.NODE_ENV, "请求地址", baseUrl);
 // 添加响应拦截器
 axios.interceptors.request.use(
   function (config) {

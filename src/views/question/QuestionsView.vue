@@ -1,4 +1,3 @@
-
 <template>
   <div id="questionsView">
     <a-row class="grid-demo">
@@ -1751,10 +1750,6 @@ const loadData = async () => {
   } else {
     message.error("题目页面加载失败：" + res.message);
   }
-
-  // 获取题目状态
-  // await StatusData(dataList.value);
-
   await statusMessages();
 
   // 获取不同难度的题目数量
